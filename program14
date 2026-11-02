@@ -1,0 +1,52 @@
+class University {
+    private String name = "Tech University";
+
+    // Static nested class
+    static class Department {
+        private String deptName;
+
+        public Department(String deptName) {
+            this.deptName = deptName;
+        }
+
+        public void displayDept() {
+            System.out.println("Department: " + deptName);
+        }
+    }
+
+    // Non-static inner class
+    class Faculty {
+        private String facultyName;
+        private String designation;
+
+        public Faculty(String facultyName, String designation) {
+            this.facultyName = facultyName;
+            this.designation = designation;
+        }
+
+        public void displayFaculty() {
+            // Can directly access outer class private fields
+            System.out.println("University: " + name + " | Faculty: " + facultyName + " (" + designation + ")");
+        }
+    }
+
+    public void displayUniversityInfo() {
+        System.out.println("University Name: " + name);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // 1. Create University object
+        University uni = new University();
+        uni.displayUniversityInfo();
+
+        // 2. Create static nested Department object WITHOUT outer class instance
+        University.Department dept = new University.Department("Computer Science");
+        dept.displayDept();
+
+        // 3. Create non-static inner Faculty object USING the University instance
+        University.Faculty fac = uni.new Faculty("Dr. Smith", "Associate Professor");
+        fac.displayFaculty();
+    }
+}
